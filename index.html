@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- GOOGLE SEARCH CONSOLE VERIFICATION -->
-  <meta name="google-site-verification" content="PASTE_YOUR_REAL_GOOGLE_CODE_HERE" />
+  <meta name="google-site-verification" content=<meta name="google-site-verification" content="pZq5ZjZTaXwU2e3AwBWKsLt_3pPgu06bL9lXgMgPphY" /> />
 
   <title>🐉 Darkion Dragon | Marketplace</title>
 
@@ -14,12 +14,27 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,Segoe UI,Arial}
     body{background:var(--bg);color:#111;overflow-x:hidden}
     .hidden{display:none}
-    header{background:linear-gradient(135deg,#020617,#0b1220);color:#fff;padding:16px 26px;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.5);transition:0.5s}
-    /* rest CSS same as tumhara */
+    header{background:linear-gradient(135deg,#020617,#0b1220);color:#fff;padding:16px 26px;position:sticky;top:0;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,0.5)}
+    .nav{display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:28px;font-weight:900;cursor:pointer}
+    .logo span{color:var(--accent)}
+    .btn{padding:10px 22px;border-radius:30px;font-weight:800;border:none;cursor:pointer}
+    .btn-dark{background:#111;color:#fff}
+    .btn-accent{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
+    .container{width:94%;max-width:1500px;margin:50px auto}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px}
+    .card{background:#fff;border-radius:24px;box-shadow:0 20px 40px rgba(0,0,0,.25);overflow:hidden}
+    .card img{width:100%;height:240px;object-fit:cover}
+    .info{text-align:center;padding:20px}
+    .add-btn{padding:12px 28px;border-radius:30px;border:none;background:#020617;color:#fff;font-weight:800;cursor:pointer}
+    .page{display:none}
+    .page.active{display:block}
+    footer{background:#000;color:#fff;text-align:center;padding:40px;margin-top:80px}
   </style>
 </head>
 
 <body>
+
 <header>
   <div class="nav">
     <div class="logo" onclick="adminClick()">🐉 DARKION <span>DRAGON</span></div>
@@ -30,83 +45,84 @@
   </div>
 </header>
 
-<!-- HOME PAGE -->
 <div id="home" class="page active container">
   <h2 style="text-align:center;margin-bottom:30px">🔥 Products</h2>
   <div class="grid" id="productGrid"></div>
 </div>
 
-<!-- CART PAGE -->
 <div id="cart" class="page container">
-  <h2 style="text-align:center; margin-bottom:20px">🛒 Your Cart</h2>
-  <div id="cartItems" style="background:#fff;padding:20px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.2);"></div>
-  <h3 id="cartTotal" style="text-align:right;margin-top:20px;font-size:24px;"></h3>
-  <button class="btn btn-accent" style="width:100%;margin-top:20px;padding:15px;font-size:18px;" onclick="showPage('payment')">Proceed to Payment</button>
-</div>
-
-<!-- PAYMENT PAGE -->
-<div id="payment" class="page container">
-  <h2 style="text-align:center;margin-bottom:20px">💳 Payment</h2>
-  <div class="payment-box">
-    <p style="margin-bottom:20px; font-weight:900; font-size:18px;">Select Payment Method</p>
-    <button class="btn btn-dark" onclick="selectPay('upi')">🔹 UPI</button>
-    <button class="btn btn-dark" onclick="selectPay('card')">💳 Card</button>
-    <button class="btn btn-dark" onclick="selectPay('cash')">💰 Cash</button>
-    <div id="upi" class="hidden"><input placeholder="Enter UPI ID"></div>
-    <div id="card" class="hidden">
-      <input placeholder="Card Number">
-      <input placeholder="MM/YY">
-      <input placeholder="CVV">
-    </div>
-    <div id="cash" class="hidden"><p>Pay on delivery</p></div>
-    <button class="btn btn-accent" style="width:100%;margin-top:20px;padding:15px;font-size:18px;" onclick="placeOrder()">Place Order</button>
-  </div>
-</div>
-
-<!-- ADMIN PAGE -->
-<div id="admin" class="page container">
-  <div class="admin">
-    <h2>🔐 Admin Panel</h2>
-    <p style="color:#22d3ee;">Password: Dragon@2025</p>
-    <input id="pname" placeholder="Product Name">
-    <input id="pprice" type="number" placeholder="Price">
-    <input id="pimg" placeholder="Image URL">
-    <button class="btn btn-accent" onclick="addProduct()">Add Product</button>
-  </div>
-</div>
-
-<!-- SUCCESS -->
-<div id="success">
-  <div class="tick">✔</div>
-  <div>ORDER PLACED SUCCESSFULLY</div>
+  <h2>🛒 Your Cart</h2>
+  <div id="cartItems"></div>
+  <h3 id="cartTotal"></h3>
 </div>
 
 <footer>
-  <p>© 2025 Darkion Dragon Company by Saurabh Yadav</p>
+  <p>© 2025 Darkion Dragon Company</p>
 </footer>
 
 <script>
-const ADMIN_PASS='Dragon@2025';
-let adminCount=0;
-let products=[
- {name:'Pocket Milk',price:60,img:'https://images.unsplash.com/photo-1585238342028-4bbc7c72d5c1'},
- {name:'Bottle Milk',price:80,img:'https://images.unsplash.com/photo-1604908554161-86d5b0a6a8c3'},
- {name:'Fruit Box',price:180,img:'https://images.unsplash.com/photo-1574226516831-e1dff420e12d'},
- {name:'Dragon Hoodie',price:1499,img:'https://images.unsplash.com/photo-1521334884684-d80222895322'}
-];
-let cart={};
-let pay='';
+const ADMIN_PASS = 'Dragon@2025';
+let adminCount = 0;
 
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='cart')renderCart();}
-function adminClick(){adminCount++;if(adminCount===8){let p=prompt('Admin Password');if(p===ADMIN_PASS){showPage('admin')}else alert('Wrong Password');adminCount=0}}
-function renderProducts(){productGrid.innerHTML='';products.forEach(p=>{let qty=cart[p.name]?.qty||0;productGrid.innerHTML+=`<div class='card'><img src='${p.img}'><div class='info'><h3>${p.name}</h3><div class='price'>₹${p.price}</div><div class='qty'>Qty in cart: ${qty}</div><button class='add-btn' onclick="addCart('${p.name}',${p.price})">Add to Cart</button></div></div>`;});}
-function addCart(n,p){cart[n]?cart[n].qty++:cart[n]={price:p,qty:1};renderProducts();}
-function renderCart(){cartItems.innerHTML='';let t=0;for(let k in cart){t+=cart[k].price*cart[k].qty;cartItems.innerHTML+=`<div class='cart-item'><span class='cart-symbol'>🛒</span><span>${k} x${cart[k].qty}</span><span>₹${cart[k].price*cart[k].qty}</span></div>`;}cartTotal.innerText='Total: ₹'+t;}
-function selectPay(m){pay=m;upi.classList.add('hidden');card.classList.add('hidden');cash.classList.add('hidden');document.getElementById(m).classList.remove('hidden')}
-function placeOrder(){if(!pay)return alert('Select payment');success.style.display='flex';setTimeout(()=>{success.style.display='none';location.reload()},2500)}
-function addProduct(){products.push({name:pname.value,price:+pprice.value,img:pimg.value});renderProducts();alert('Product Added');}
+let products = [
+  {name:'Pocket Milk',price:60,img:'https://images.unsplash.com/photo-1585238342028-4bbc7c72d5c1'},
+  {name:'Bottle Milk',price:80,img:'https://images.unsplash.com/photo-1604908554161-86d5b0a6a8c3'},
+  {name:'Fruit Box',price:180,img:'https://images.unsplash.com/photo-1574226516831-e1dff420e12d'},
+  {name:'Dragon Hoodie',price:1499,img:'https://images.unsplash.com/photo-1521334884684-d80222895322'}
+];
+
+let cart = {};
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function adminClick(){
+  adminCount++;
+  if(adminCount === 8){
+    let p = prompt('Admin Password');
+    if(p === ADMIN_PASS) alert('Admin Access Granted');
+    else alert('Wrong Password');
+    adminCount = 0;
+  }
+}
+
+function renderProducts(){
+  productGrid.innerHTML = '';
+  products.forEach(p=>{
+    productGrid.innerHTML += `
+      <div class="card">
+        <img src="${p.img}">
+        <div class="info">
+          <h3>${p.name}</h3>
+          <div>₹${p.price}</div>
+          <button class="add-btn" onclick="addCart('${p.name}',${p.price})">Add to Cart</button>
+        </div>
+      </div>
+    `;
+  });
+}
+
+function addCart(n,p){
+  cart[n] ? cart[n].qty++ : cart[n]={price:p,qty:1};
+  renderCart();
+}
+
+function renderCart(){
+  cartItems.innerHTML='';
+  let total=0;
+  for(let k in cart){
+    total+=cart[k].price*cart[k].qty;
+    cartItems.innerHTML += `
+      <div>${k} x ${cart[k].qty} = ₹${cart[k].price*cart[k].qty}</div>
+    `;
+  }
+  cartTotal.innerText = 'Total: ₹'+total;
+}
+
 renderProducts();
 </script>
+
 </body>
 </html>
-
